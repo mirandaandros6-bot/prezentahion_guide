@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 шагов к успешной презентации — Business Luxe</title>
+<meta name="description" content="Премиальный бизнес-фреймворк для проведения Zoom-презентаций с наставником. Business Luxe Edition 2025.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   7 ШАГОВ К УСПЕШНОЙ ПРЕЗЕНТАЦИИ — BUSINESS LUXE EDITION
+   Standalone HTML · No JS frameworks · CSS scroll-snap
+   ============================================================ */
+
+:root{
+  --bg-base:#0E0E10;
+  --bg-section:#1A1A1D;
+  --text-primary:#F5F1E8;
+  --text-muted:#A8A29A;
+  --gold:#C9A961;
+  --gold-light:#E0C684;
+  --gold-line:rgba(201,169,97,0.3);
+  --gold-line-strong:rgba(201,169,97,0.55);
+  --gold-glow:rgba(201,169,97,0.12);
+  --font-display:'Playfair Display', Georgia, serif;
+  --font-ui:'Inter', system-ui, sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html{
+  scroll-behavior:smooth;
+  scroll-snap-type:y mandatory;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+body{
+  font-family:var(--font-ui);
+  background:var(--bg-base);
+  color:var(--text-primary);
+  line-height:1.55;
+  font-weight:400;
+  overflow-x:hidden;
+}
+
+/* ---------- MARBLE TEXTURE BACKGROUND ---------- */
+.slide{
+  position:relative;
+  min-height:100vh;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:5rem 4rem;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  background-color:var(--bg-base);
+  background-image:
+    radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.55) 100%),
+    radial-gradient(circle at 20% 30%, rgba(201,169,97,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(201,169,97,0.03) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.012) 0%, transparent 60%);
+  overflow:hidden;
+}
+
+/* Subtle marble veining via SVG noise pattern */
+.slide::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.79  0 0 0 0 0.66  0 0 0 0 0.38  0 0 0 0.035 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity:0.55;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Gold edge glow */
+.slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, transparent 60%, rgba(201,169,97,0.05) 100%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.slide > *{position:relative;z-index:1}
+
+/* ---------- SLIDE NUMBER (top right) ---------- */
+.slide-number{
+  position:absolute;
+  top:2.2rem;
+  right:2.5rem;
+  font-family:var(--font-ui);
+  font-weight:300;
+  font-size:0.85rem;
+  letter-spacing:0.3em;
+  color:var(--gold);
+  z-index:5;
+}
+.slide-number .sep{opacity:0.5;margin:0 0.4em}
+
+/* ---------- BRAND BAR (top left, optional) ---------- */
+.brand-mark{
+  position:absolute;
+  top:2.2rem;
+  left:2.5rem;
+  font-family:var(--font-ui);
+  font-weight:300;
+  font-size:0.7rem;
+  letter-spacing:0.4em;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  z-index:5;
+}
+.brand-mark .dot{color:var(--gold);margin:0 0.6em}
+
+/* ---------- CRIT (step subheader) ---------- */
+.crit{
+  font-family:var(--font-ui);
+  font-weight:300;
+  font-size:0.78rem;
+  letter-spacing:0.4em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:1.4rem;
+  display:flex;
+  align-items:center;
+  gap:0.9rem;
+}
+.crit::before{
+  content:"";
+  width:32px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold));
+  flex-shrink:0;
+}
+
+/* ---------- SLIDE TITLE ---------- */
+.slide-title{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:clamp(2.1rem,4.2vw,3.3rem);
+  color:var(--text-primary);
+  line-height:1.1;
+  letter-spacing:-0.01em;
+  margin-bottom:2.4rem;
+  max-width:760px;
+}
+
+/* ---------- CONTAINER ---------- */
+.slide-content{
+  width:100%;
+  max-width:1180px;
+  margin:0 auto;
+}
+
+/* ============================================================
+   SLIDE 1 — COVER
+   ============================================================ */
+#slide-01{
+  text-align:center;
+}
+.cover-frame{
+  position:relative;
+  padding:5rem 4.5rem;
+  border:1px solid var(--gold-line);
+  max-width:780px;
+  width:100%;
+  margin:0 auto;
+}
+/* Premium corner brackets */
+.cover-frame::before,
+.cover-frame::after,
+.cover-frame .corner-tl,
+.cover-frame .corner-br{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:22px;
+  border:1.5px solid var(--gold);
+}
+.cover-frame::before{top:-6px;left:-6px;border-right:none;border-bottom:none}
+.cover-frame::after{top:-6px;right:-6px;border-left:none;border-bottom:none}
+.cover-frame .corner-bl{position:absolute;bottom:-6px;left:-6px;width:22px;height:22px;border:1.5px solid var(--gold);border-right:none;border-top:none}
+.cover-frame .corner-br{bottom:-6px;right:-6px;border-left:none;border-top:none}
+
+.cover-eyebrow{
+  font-family:var(--font-ui);
+  font-weight:300;
+  font-size:0.72rem;
+  letter-spacing:0.5em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:2.2rem;
+}
+.cover-eyebrow .diamond{margin:0 0.7em;color:var(--gold-light)}
+
+.cover-title{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(2.25rem,5.5vw,4.25rem);
+  line-height:1.05;
+  letter-spacing:-0.015em;
+}
+.cover-title .line-1{
+  display:block;
+  color:var(--gold);
+  font-weight:700;
+}
+.cover-title .line-2{
+  display:block;
+  color:var(--text-primary);
+  font-weight:400;
+  margin-top:0.4rem;
+}
+
+.cover-divider{
+  width:60px;
+  height:1px;
+  background:linear-gradient(90deg, var(--gold), var(--gold-light));
+  margin:2rem auto;
+}
+
+.cover-subtitle{
+  font-family:var(--font-ui);
+  font-weight:300;
+  font-size:0.85rem;
+  letter-spacing:0.4em;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  margin-bottom:3rem;
+}
+
+.cover-tag{
+  display:inline-block;
+  font-family:var(--font-ui);
+  font-weight:400;
+  font-size:0.68rem;
+  letter-spacing:0.35em;
+  color:var(--gold);
+  text-transform:uppercase;
+  padding:0.55rem 1.4rem;
+  border:1px solid var(--gold-line);
+  border-radius:1px;
+}
+.cover-tag .dot{margin:0 0.5em;color:var(--gold-light)}
+
+/* ============================================================
+   SLIDE 2 — PREPARATION (two premium cards)
+   ============================================================ */
+.cards-row{
+  display:flex;
+  gap:2rem;
+  margin-top:1.5rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.lux-card{
+  flex:1 1 380px;
+  max-width:520px;
+  background:var(--bg-section);
+  border:1px solid var(--gold-line);
+  padding:2.6rem 2.4rem;
+  position:relative;
+  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.lux-card::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;
+  width:36px;
+  height:36px;
+  border-top:1px solid var(--gold);
+  border-left:1px solid var(--gold);
+}
+.lux-card::after{
+  content:"";
+  position:absolute;
+  bottom:0;right:0;
+  width:36px;
+  height:36px;
+  border-bottom:1px solid var(--gold);
+  border-right:1px solid var(--gold);
+}
+.lux-card:hover{
+  transform:translateY(-4px) scale(1.01);
+  box-shadow:0 14px 50px rgba(201,169,97,0.14), 0 0 0 1px var(--gold-line-strong);
+  border-color:var(--gold-line-strong);
+}
+
+.card-icon{
+  width:42px;
+  height:42px;
+  color:var(--gold);
+  margin-bottom:1.5rem;
+  display:block;
+}
+.card-label{
+  font-family:var(--font-ui);
+  font-weight:500;
+  font-size:0.72rem;
+  letter-spacing:0.35em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:0.9rem;
+}
+.card-heading{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:1.6rem;
+  color:var(--text-primary);
+  margin-bottom:1rem;
+  line-height:1.2;
+}
+.card-body{
+  font-family:var(--font-ui);
+  font-weight:400;
+  font-size:0.98rem;
+  color:var(--text-primary);
+  line-height:1.65;
+  opacity:0.9;
+}
+
+/* ============================================================
+   SLIDE 3 — GUEST ENTRY (big numerals + text)
+   ============================================================ */
+.numbered-stack{
+  display:flex;
+  flex-direction:column;
+  gap:2.5rem;
+  padding-left:1.5rem;
+  border-left:1px solid var(--gold-line);
+}
+.numeral-row{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:2.4rem;
+  align-items:center;
+}
+.giant-numeral{
+  font-family:var(--font-display);
+  font-weight:900;
+  font-size:8rem;
+  line-height:0.9;
+  color:var(--gold);
+  opacity:0.4;
+  letter-spacing:-0.04em;
+  text-align:right;
+}
+.numeral-text{
+  font-family:var(--font-ui);
+  font-weight:400;
+  font-size:1.15rem;
+  color:var(--text-primary);
+  line-height:1.65;
+  max-width:560px;
+}
+
+/* ============================================================
+   SLIDE 4 — CLEAR SPACE (two-column with divider)
+   ============================================================ */
+.two-col-divider{
+  display:grid;
+  grid-template-columns:1fr 1px 1fr;
+  gap:3rem;
+  align-items:start;
+}
+.divider-v{
+  width:1px;
+  background:linear-gradient(180deg, transparent, var(--gold-line-strong), transparent);
+  align-self:stretch;
+  height:100%;
+  min-height:280px;
+}
+.feature-block .card-icon{
+  width:46px;height:46px;
+  margin-bottom:1.4rem;
+}
+.feature-block .card-heading{
+  font-size:1.5rem;
+  margin-bottom:0.9rem;
+}
+.feature-block .card-body{
+  font-size:1rem;
+  line-height:1.6;
+}
+
+/* ============================================================
+   SLIDE 5 — WELCOMING
+   ============================================================ */
+.timeline-stack{
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
+  padding-left:1.5rem;
+  position:relative;
+}
+.timeline-stack::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:1px;
+  background:linear-gradient(180deg, transparent, var(--gold), transparent);
+}
+.tl-row{
+  display:grid;
+  grid-template-columns:90px 1fr;
+  gap:2rem;
+  align-items:start;
+}
+.tl-num{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:3rem;
+  color:var(--gold);
+  line-height:1;
+}
+.tl-body{
+  font-family:var(--font-ui);
+  font-size:1.1rem;
+  color:var(--text-primary);
+  line-height:1.6;
+}
+.tl-body .label{
+  font-weight:500;
+  color:var(--text-primary);
+  margin-bottom:0.5rem;
+  display:block;
+}
+.quote-frame{
+  margin-top:1rem;
+  padding:1.2rem 1.6rem;
+  border:1px solid var(--gold-line);
+  border-left:2px solid var(--gold);
+  background:rgba(26,26,29,0.5);
+  font-family:var(--font-ui);
+  font-style:italic;
+  font-weight:400;
+  font-size:1rem;
+  color:var(--text-primary);
+  line-height:1.55;
+}
+.quote-frame .placeholder{
+  color:var(--gold);
+  font-style:italic;
+}
+
+/* ============================================================
+   SLIDE 6 — OPENING (showcase quote)
+   ============================================================ */
+.intro-line{
+  font-family:var(--font-ui);
+  font-weight:400;
+  font-size:1.05rem;
+  color:var(--text-muted);
+  line-height:1.6;
+  max-width:880px;
+  margin:0 auto 2.4rem;
+  text-align:center;
+}
+.showcase-quote{
+  position:relative;
+  max-width:900px;
+  margin:0 auto;
+  padding:3.5rem 3rem 3rem 5.5rem;
+  border:1px solid var(--gold-line);
+  background:linear-gradient(180deg, rgba(26,26,29,0.6), rgba(14,14,16,0.4));
+}
+.showcase-quote .corner{position:absolute;width:18px;height:18px;border:1.5px solid var(--gold)}
+.showcase-quote .corner.tl{top:-6px;left:-6px;border-right:none;border-bottom:none}
+.showcase-quote .corner.tr{top:-6px;right:-6px;border-left:none;border-bottom:none}
+.showcase-quote .corner.bl{bottom:-6px;left:-6px;border-right:none;border-top:none}
+.showcase-quote .corner.br{bottom:-6px;right:-6px;border-left:none;border-top:none}
+
+.giant-quote-mark{
+  position:absolute;
+  top:-0.5rem;
+  left:1.2rem;
+  font-family:var(--font-display);
+  font-weight:900;
+  font-size:10rem;
+  line-height:1;
+  color:var(--gold);
+  opacity:0.5;
+  pointer-events:none;
+}
+.quote-body{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:1.25rem;
+  line-height:1.75;
+  color:var(--text-primary);
+}
+.quote-body .placeholder{
+  color:var(--gold);
+  font-weight:600;
+  font-style:italic;
+  background:rgba(201,169,97,0.08);
+  padding:0 0.25em;
+}
+
+/* ============================================================
+   SLIDE 7 — ACTIVE LISTENING (three cards)
+   ============================================================ */
+.three-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:1.8rem;
+  margin-top:1rem;
+}
+.listen-card{
+  background:var(--bg-section);
+  border:1px solid var(--gold-line);
+  padding:2rem 1.8rem;
+  position:relative;
+}
+.listen-card .check-icon{
+  width:38px;
+  height:38px;
+  color:var(--gold);
+  margin-bottom:1.2rem;
+}
+.listen-card .primary{
+  font-family:var(--font-ui);
+  font-weight:500;
+  font-size:1.05rem;
+  color:var(--text-primary);
+  line-height:1.55;
+  margin-bottom:0.7rem;
+}
+.listen-card .secondary{
+  font-family:var(--font-ui);
+  font-weight:300;
+  font-size:0.9rem;
+  color:var(--text-muted);
+  line-height:1.55;
+}
+.listen-card::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;
+  width:28px;height:1px;
+  background:var(--gold);
+}
+
+/* ============================================================
+   SLIDE 8 — RESPECT THE MENTOR (2x2 grid)
+   ============================================================ */
+.grid-2x2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.6rem;
+  margin-top:1rem;
+}
+.grid-cell{
+  background:var(--bg-section);
+  border:1px solid var(--gold-line);
+  padding:1.8rem 1.6rem 1.6rem;
+  position:relative;
+  min-height:200px;
+}
+.grid-cell .cell-num{
+  position:absolute;
+  top:0.6rem;
+  right:1rem;
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:3rem;
+  color:var(--gold);
+  opacity:0.6;
+  line-height:1;
+}
+.grid-cell .cell-body{
+  font-family:var(--font-ui);
+  font-weight:400;
+  font-size:0.92rem;
+  color:var(--text-primary);
+  line-height:1.6;
+  padding-right:2.5rem;
+  margin-top:0.6rem;
+}
+
+/* ============================================================
+   SLIDE 9 — CLOSING
+   ============================================================ */
+.closing-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  margin-bottom:2rem;
+}
+.closing-block{
+  background:var(--bg-section);
+  border:1px solid var(--gold-line);
+  padding:2rem 1.8rem;
+  position:relative;
+}
+.closing-block .block-icon{
+  width:36px;height:36px;
+  color:var(--gold);
+  margin-bottom:1rem;
+}
+.closing-block .block-title{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:1.35rem;
+  color:var(--gold);
+  margin-bottom:1rem;
+  line-height:1.2;
+}
+.closing-block .block-body{
+  font-family:var(--font-ui);
+  font-size:1rem;
+  color:var(--text-primary);
+  line-height:1.65;
+}
+.closing-block .block-body p+p{margin-top:0.6rem}
+.final-note{
+  margin-top:1rem;
+  padding:1.4rem 2rem;
+  border:1px solid var(--gold);
+  border-left:3px solid var(--gold);
+  background:rgba(201,169,97,0.04);
+  font-family:var(--font-ui);
+  font-style:italic;
+  font-weight:400;
+  font-size:1.05rem;
+  color:var(--text-primary);
+  text-align:center;
+}
+
+/* ============================================================
+   SLIDE 10 — THANK YOU (стили оставлены — не используются, можно удалить при желании)
+   ============================================================ */
+#slide-10{
+  text-align:center;
+  background-image:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,169,97,0.08) 0%, transparent 65%),
+    radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.55) 100%),
+    radial-gradient(circle at 25% 35%, rgba(201,169,97,0.05) 0%, transparent 40%),
+    radial-gradient(circle at 75% 65%, rgba(201,169,97,0.04) 0%, transparent 40%);
+}
+.thanks-title{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(3rem,8vw,6rem);
+  line-height:1.05;
+  letter-spacing:-0.015em;
+  margin-bottom:0;
+}
+.thanks-title .line-1{
+  display:block;
+  color:var(--gold);
+}
+.thanks-title .line-2{
+  display:block;
+  color:var(--text-primary);
+  font-weight:400;
+  margin-top:0.4rem;
+}
+.thanks-divider{
+  width:80px;
+  height:1px;
+  background:linear-gradient(90deg, var(--gold), var(--gold-light));
+  margin:2.2rem auto;
+}
+.contact-line{
+  font-family:var(--font-ui);
+  font-weight:300;
+  font-size:0.95rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-bottom:3.5rem;
+}
+.contact-line .dot{
+  color:var(--gold);
+  font-size:0.55rem;
+  opacity:0.7;
+}
+.contact-line .ph{
+  color:var(--gold-light);
+}
+.logo-block{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:200px;
+  height:60px;
+  border:1px solid var(--gold-line);
+  font-family:var(--font-ui);
+  font-weight:300;
+  font-size:0.7rem;
+  letter-spacing:0.45em;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.bottom-line{
+  width:140px;
+  height:1px;
+  background:var(--gold-line-strong);
+  margin:0 auto 1.5rem;
+}
+.edition-tag{
+  font-family:var(--font-ui);
+  font-weight:400;
+  font-size:0.68rem;
+  letter-spacing:0.4em;
+  color:var(--gold);
+  text-transform:uppercase;
+}
+.edition-tag .dot{color:var(--gold-light);margin:0 0.6em}
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+.progress-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  height:2px;
+  width:0%;
+  background:linear-gradient(90deg, var(--gold), var(--gold-light));
+  z-index:1000;
+  transition:width .15s ease-out;
+  box-shadow:0 0 12px rgba(201,169,97,0.6);
+}
+
+/* ============================================================
+   RIGHT DOT NAVIGATION
+   ============================================================ */
+.dot-nav{
+  position:fixed;
+  right:1.2rem;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:0.7rem;
+  z-index:50;
+}
+.dot-nav a{
+  display:block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:transparent;
+  border:1px solid var(--gold-line-strong);
+  transition:all .25s ease;
+}
+.dot-nav a.active{
+  background:var(--gold);
+  border-color:var(--gold);
+  box-shadow:0 0 8px var(--gold);
+  transform:scale(1.2);
+}
+.dot-nav a:hover{border-color:var(--gold)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:880px){
+  .slide{padding:4rem 1.5rem}
+  .slide-number{top:1.4rem;right:1.4rem;font-size:0.7rem}
+  .brand-mark{top:1.4rem;left:1.4rem;font-size:0.55rem;letter-spacing:0.3em}
+  .cover-frame{padding:3.5rem 1.6rem}
+  .numeral-row{grid-template-columns:80px 1fr;gap:1.4rem}
+  .giant-numeral{font-size:5rem}
+  .two-col-divider{grid-template-columns:1fr;gap:2rem}
+  .divider-v{display:none}
+  .grid-2x2{grid-template-columns:1fr;gap:1rem}
+  .closing-grid{grid-template-columns:1fr;gap:1.4rem}
+  .tl-row{grid-template-columns:60px 1fr;gap:1.2rem}
+  .tl-num{font-size:2.2rem}
+  .showcase-quote{padding:2.5rem 1.4rem 1.8rem 3.5rem}
+  .giant-quote-mark{font-size:6rem;left:0.6rem}
+  .quote-body{font-size:1.05rem}
+  .grid-cell .cell-num{font-size:2.2rem}
+  .grid-cell .cell-body{padding-right:0;font-size:0.9rem}
+  .dot-nav{display:none}
+  .contact-line{font-size:0.75rem;letter-spacing:0.2em}
+  .logo-block{width:160px;height:50px}
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print{
+  html{scroll-snap-type:none}
+  .progress-bar,.dot-nav{display:none}
+  .slide{
+    page-break-after:always;
+    min-height:100vh;
+    background:#0E0E10 !important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .slide:last-child{page-break-after:auto}
+  .lux-card:hover{transform:none;box-shadow:none}
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PROGRESS BAR
+     ============================================================ -->
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<!-- ============================================================
+     RIGHT DOT NAV
+     ============================================================ -->
+<nav class="dot-nav" aria-label="Навигация по слайдам">
+  <a href="#slide-01" data-i="0" aria-label="Слайд 1"></a>
+  <a href="#slide-02" data-i="1" aria-label="Слайд 2"></a>
+  <a href="#slide-03" data-i="2" aria-label="Слайд 3"></a>
+  <a href="#slide-04" data-i="3" aria-label="Слайд 4"></a>
+  <a href="#slide-05" data-i="4" aria-label="Слайд 5"></a>
+  <a href="#slide-06" data-i="5" aria-label="Слайд 6"></a>
+  <a href="#slide-07" data-i="6" aria-label="Слайд 7"></a>
+  <a href="#slide-08" data-i="7" aria-label="Слайд 8"></a>
+  <a href="#slide-09" data-i="8" aria-label="Слайд 9"></a>
+</nav>
+
+<!-- ============================================================
+     SLIDE 1 — COVER
+     ============================================================ -->
+<section class="slide" id="slide-01" aria-label="Титульный слайд">
+  <span class="slide-number">01<span class="sep">/</span>09</span>
+  <span class="brand-mark">Business<span class="dot">·</span>Guide</span>
+
+  <div class="cover-frame">
+    <span class="corner-bl" aria-hidden="true"></span>
+    <span class="corner-br" aria-hidden="true"></span>
+
+    <div class="cover-eyebrow">Edition 2026<span class="diamond">◆</span>Business Guide</div>
+
+    <h1 class="cover-title">
+      <span class="line-1">7 ШАГОВ</span>
+      <span class="line-2">К УСПЕШНОЙ ПРЕЗЕНТАЦИИ</span>
+    </h1>
+
+    <div class="cover-divider" aria-hidden="true"></div>
+
+  
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 2 — PREPARATION
+     ============================================================ -->
+<section class="slide" id="slide-02" aria-label="Слайд 2: Подготовка к презентации">
+  <span class="slide-number">02<span class="sep">/</span>09</span>
+  <span class="brand-mark">7 Шагов<span class="dot">·</span>Подготовка</span>
+
+  <div class="slide-content">
+    <div class="crit">Шаг 01</div>
+    <h2 class="slide-title">Подготовка к&nbsp;презентации</h2>
+
+    <div class="cards-row">
+      <article class="lux-card">
+        <!-- Person / smile icon -->
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="24" cy="16" r="8"/>
+          <path d="M8 42c0-8 7-13 16-13s16 5 16 13"/>
+          <path d="M19 18c1.5 2 3 3 5 3s3.5-1 5-3"/>
+          <circle cx="20" cy="15" r="0.8" fill="currentColor"/>
+          <circle cx="28" cy="15" r="0.8" fill="currentColor"/>
+        </svg>
+        <div class="card-label">01 — Внешний вид</div>
+        <h3 class="card-heading">Приготовь себя</h3>
+        <p class="card-body">внешний вид, настроение, улыбка</p>
+      </article>
+
+      <article class="lux-card">
+        <!-- Notebook icon -->
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="10" y="6" width="28" height="36" rx="2"/>
+          <path d="M16 6v36"/>
+          <path d="M20 16h12M20 22h12M20 28h8"/>
+          <path d="M13 12v4M13 20v4M13 28v4M13 36v0"/>
+        </svg>
+        <div class="card-label">02 — Инструменты</div>
+        <h3 class="card-heading">Ежедневник + ручка</h3>
+        <p class="card-body">(для себя)</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 3 — GUEST ENTRY
+     ============================================================ -->
+<section class="slide" id="slide-03" aria-label="Слайд 3: Заход гостей в Zoom">
+  <span class="slide-number">03<span class="sep">/</span>09</span>
+  <span class="brand-mark">7 Шагов<span class="dot">·</span>Гости</span>
+
+  <div class="slide-content">
+    <div class="crit">Шаг 02</div>
+    <h2 class="slide-title">Заход гостей в&nbsp;Zoom</h2>
+
+    <div class="numbered-stack">
+      <div class="numeral-row">
+        <div class="giant-numeral" aria-hidden="true">01</div>
+        <p class="numeral-text">Вначале представляем друг другу (просто по имени) — без подробностей и лишней информации.</p>
+      </div>
+      <div class="numeral-row">
+        <div class="giant-numeral" aria-hidden="true">02</div>
+        <p class="numeral-text">На встрече не говорим и не вспоминаем о тех, кто не пришел! Главное — те люди, которые сейчас здесь.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 4 — CLEAR THE SPACE
+     ============================================================ -->
+<section class="slide" id="slide-04" aria-label="Слайд 4: Освободите пространство">
+  <span class="slide-number">04<span class="sep">/</span>09</span>
+  <span class="brand-mark">7 Шагов<span class="dot">·</span>Пространство</span>
+
+  <div class="slide-content">
+    <div class="crit">Шаг 03</div>
+    <h2 class="slide-title">Освободите пространство</h2>
+
+    <div class="two-col-divider">
+      <div class="feature-block">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="8" y="14" width="32" height="24" rx="2"/>
+          <path d="M16 14V10h16v4"/>
+          <path d="M8 22h32"/>
+          <rect x="20" y="20" width="8" height="4" rx="0.5"/>
+          <path d="M24 30v6M21 33h6"/>
+        </svg>
+        <h3 class="card-heading">Деловая встреча</h3>
+        <p class="card-body">Помни, что это деловая встреча, это твой бизнес.</p>
+      </div>
+
+      <div class="divider-v" aria-hidden="true"></div>
+
+      <div class="feature-block">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="6" y="14" width="28" height="22" rx="2"/>
+          <path d="M14 14l-4-6H4"/>
+          <circle cx="20" cy="25" r="6"/>
+          <path d="M40 18l4 4M44 18l-4 4M36 22h8"/>
+        </svg>
+        <h3 class="card-heading">Никаких отвлекающих элементов</h3>
+        <p class="card-body">Детей не должно быть в кадре или животных. Люди быстро отвлекаются.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 5 — WELCOMING
+     ============================================================ -->
+<section class="slide" id="slide-05" aria-label="Слайд 5: Как встретить">
+  <span class="slide-number">05<span class="sep">/</span>09</span>
+  <span class="brand-mark">7 Шагов<span class="dot">·</span>Встреча</span>
+
+  <div class="slide-content">
+    <div class="crit">Шаг 04</div>
+    <h2 class="slide-title">Как встретить</h2>
+
+    <div class="timeline-stack">
+      <div class="tl-row">
+        <div class="tl-num">01</div>
+        <div class="tl-body">
+          <span class="label">Встретить наставника</span>
+          показать своё уважение к нему действиями и словами.
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-num">02</div>
+        <div class="tl-body">
+          <span class="label">Представить наставника присутствующим:</span>
+          <div class="quote-frame">
+            «Моя хорошая подруга <span class="placeholder">[имя наставника]</span>, а это <span class="placeholder">[имя гостя]</span>»
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 6 — OPENING / SHOWCASE QUOTE
+     ============================================================ -->
+<section class="slide" id="slide-06" aria-label="Слайд 6: Начало презентации">
+  <span class="slide-number">06<span class="sep">/</span>09</span>
+  <span class="brand-mark">7 Шагов<span class="dot">·</span>Открытие</span>
+
+  <div class="slide-content" style="max-width:980px">
+    <div class="crit" style="justify-content:center">Шаг 05</div>
+    <h2 class="slide-title" style="text-align:center;margin-left:auto;margin-right:auto">Начало презентации</h2>
+
+    <p class="intro-line">Перед началом презентации сделать построение, промоушен наставнику, чтобы гости поняли, что это деловой человек.</p>
+
+    <blockquote class="showcase-quote">
+      <span class="corner tl" aria-hidden="true"></span>
+      <span class="corner tr" aria-hidden="true"></span>
+      <span class="corner bl" aria-hidden="true"></span>
+      <span class="corner br" aria-hidden="true"></span>
+      <span class="giant-quote-mark" aria-hidden="true">"</span>
+      <p class="quote-body">
+        Я рада, что все собрались, что ты зашла на зум. Хочу представить <span class="placeholder">[имя наставника]</span> — этот человек очень успешный. Она не только сама успешная, но и многим людям уже помогла достигнуть успехов. Я приняла серьезное решение и хочу, чтобы вы внимательно послушали очень ценную информацию, которую сейчас нам расскажет <span class="placeholder">[имя]</span>. Если будут вопросы, запишите их и сможете в конце задать.
+      </p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 7 — ACTIVE LISTENING
+     ============================================================ -->
+<section class="slide" id="slide-07" aria-label="Слайд 7: Активное слушание">
+  <span class="slide-number">07<span class="sep">/</span>09</span>
+  <span class="brand-mark">7 Шагов<span class="dot">·</span>Слушание</span>
+
+  <div class="slide-content">
+    <div class="crit">Шаг 06</div>
+    <h2 class="slide-title">Презентация</h2>
+
+    <div class="three-grid">
+      <article class="listen-card">
+        <!-- Ear / listening icon -->
+        <svg class="check-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 22c0-8 5-14 11-14s10 6 10 13c0 5-3 7-5 9-2 2-3 4-3 7 0 3-2 5-4 5"/>
+          <path d="M19 26c1-1 2-1 3 0M24 30c1-1 2-1 3 0"/>
+          <path d="M12 30c2 0 3 1 3 3"/>
+        </svg>
+        <p class="primary">Слушаем, киваем, улыбаемся и всё записываем.</p>
+        <p class="secondary">Показываем своим примером, что это и правда важная информация.</p>
+      </article>
+
+      <article class="listen-card">
+        <!-- Target / focus icon -->
+        <svg class="check-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="24" cy="24" r="14"/>
+          <circle cx="24" cy="24" r="8"/>
+          <circle cx="24" cy="24" r="2" fill="currentColor"/>
+          <path d="M24 4v6M24 38v6M4 24h6M38 24h6"/>
+        </svg>
+        <p class="primary">Не отвлекаемся — сейчас самое важное — презентация.</p>
+        <p class="secondary">Фокус внимания — на наставнике и на информации.</p>
+      </article>
+
+      <article class="listen-card">
+        <!-- Stop / no interruption icon -->
+        <svg class="check-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="24" cy="24" r="16"/>
+          <path d="M16 22c2-3 4-4 8-4s6 1 8 4"/>
+          <path d="M16 22l-3-3M32 22l3-3"/>
+          <path d="M19 30c2 2 5 3 8 0"/>
+          <line x1="14" y1="14" x2="34" y2="34" stroke-width="1.8"/>
+        </svg>
+        <p class="primary">НЕ перебиваем наставника и не дополняем, пока он сам об этом вас не попросит.</p>
+        <p class="secondary">Отвечаем только на строго заданные вопросы.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 8 — RESPECT THE MENTOR (2x2)
+     ============================================================ -->
+<section class="slide" id="slide-08" aria-label="Слайд 8: Уважение к наставнику">
+  <span class="slide-number">08<span class="sep">/</span>09</span>
+  <span class="brand-mark">7 Шагов<span class="dot">·</span>Уважение</span>
+
+  <div class="slide-content">
+    <div class="crit">Шаг 06</div>
+    <h2 class="slide-title">Презентация</h2>
+
+    <div class="grid-2x2">
+      <div class="grid-cell">
+        <span class="cell-num" aria-hidden="true">01</span>
+        <p class="cell-body">Даже если наставник на ваш взгляд что-то не досказал или сказал неправильно, ни в коем случае его не перебиваем. Это важный момент.</p>
+      </div>
+      <div class="grid-cell">
+        <span class="cell-num" aria-hidden="true">02</span>
+        <p class="cell-body">Люди, которые сидят в Zoom, слышат презентацию впервые. Перебивая наставника, вы показываете своё неуважение, и ваши люди будут думать, что наставник некомпетентный.</p>
+      </div>
+      <div class="grid-cell">
+        <span class="cell-num" aria-hidden="true">03</span>
+        <p class="cell-body">Наставник знает, когда и что говорить. Не бывает двух одинаковых презентаций. Он пообщался с вашими людьми перед началом и выявил те моменты, которые смогут их заинтересовать, и будет делать акценты именно на эти моменты. Если наставник о чём-то не сказал, значит, об этом говорить на данный момент и не нужно.</p>
+      </div>
+      <div class="grid-cell">
+        <span class="cell-num" aria-hidden="true">04</span>
+        <p class="cell-body">Наставник тратит на вас своё личное время, помогает вам. Ваша задача — не мешать ему помогать вам, работать с вашими людьми.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 9 — CLOSING
+     ============================================================ -->
+<section class="slide" id="slide-09" aria-label="Слайд 9: Окончание презентации">
+  <span class="slide-number">09<span class="sep">/</span>09</span>
+  <span class="brand-mark">7 Шагов<span class="dot">·</span>Финал</span>
+
+  <div class="slide-content">
+    <div class="crit">Шаг 07</div>
+    <h2 class="slide-title">Окончание презентации</h2>
+
+    <div class="closing-grid">
+      <article class="closing-block">
+        <!-- Handshake / heart icon -->
+        <svg class="block-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 30l-6-6a3 3 0 014-4l6 6"/>
+          <path d="M14 26l-2-2a2 2 0 013-3l4 4"/>
+          <path d="M34 30l6-6a3 3 0 00-4-4l-6 6"/>
+          <path d="M34 26l2-2a2 2 0 00-3-3l-4 4"/>
+          <path d="M18 28c2-1 4-1 6 0s4 1 6 0"/>
+          <path d="M14 30h20v8H14z"/>
+        </svg>
+        <h3 class="block-title">Поблагодарить наставника</h3>
+        <div class="block-body">
+          <p>Спасибо за уделённое время. Классная презентация.</p>
+        </div>
+      </article>
+
+      <article class="closing-block">
+        <!-- People icon -->
+        <svg class="block-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="18" cy="16" r="6"/>
+          <path d="M6 38c0-7 5-12 12-12s12 5 12 12"/>
+          <circle cx="34" cy="18" r="5"/>
+          <path d="M30 28c6 0 12 4 12 10"/>
+        </svg>
+        <h3 class="block-title">Гостям</h3>
+        <div class="block-body">
+          <p>Молодец, что зашла. Ты человек открытый, разбирайся.</p>
+          <p>У нас есть чат для гостей — думай, знакомься с информацией. Ссылку тебе сейчас отправлю. Хорошо?</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="final-note">Добавить их сразу в гостевой чат для думающих.</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MINIMAL VANILLA JS (progress + dot nav)
+     ============================================================ -->
+<script>
+(function(){
+  "use strict";
+  var slides = document.querySelectorAll('.slide');
+  var dots = document.querySelectorAll('.dot-nav a');
+  var bar = document.getElementById('progressBar');
+  var total = slides.length;
+
+  function updateProgress(){
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var scrolled = window.scrollY || document.documentElement.scrollTop;
+    var pct = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+
+  // Intersection Observer for active slide highlight
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var id = entry.target.id;
+          var idx = Array.prototype.indexOf.call(slides, entry.target);
+          dots.forEach(function(d, i){
+            if(i === idx){ d.classList.add('active'); }
+            else { d.classList.remove('active'); }
+          });
+        }
+      });
+    }, { threshold: 0.55 });
+    slides.forEach(function(s){ io.observe(s); });
+  } else {
+    // Fallback
+    dots.forEach(function(d,i){
+      d.addEventListener('click', function(){ dots.forEach(function(x){ x.classList.remove('active'); }); d.classList.add('active'); });
+    });
+  }
+
+  // Scroll throttling
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      window.requestAnimationFrame(function(){
+        updateProgress();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e){
+    var currentIdx = 0;
+    for(var i=0; i<slides.length; i++){
+      var rect = slides[i].getBoundingClientRect();
+      if(rect.top >= -window.innerHeight*0.5 && rect.top < window.innerHeight*0.5){ currentIdx = i; break; }
+    }
+    if(e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' '){
+      e.preventDefault();
+      if(slides[currentIdx+1]) slides[currentIdx+1].scrollIntoView({ behavior:'smooth' });
+    } else if(e.key === 'ArrowUp' || e.key === 'PageUp'){
+      e.preventDefault();
+      if(slides[currentIdx-1]) slides[currentIdx-1].scrollIntoView({ behavior:'smooth' });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
